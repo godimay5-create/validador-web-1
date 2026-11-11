@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validador Tributário · Contrato</title>
+<link rel="icon" href="/img/simbolo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<!-- carregando -->
+<div id="tela-carga" class="tela-centro">
+  <img src="/img/logo_navy.png" alt="Contrato" class="logo-grande">
+  <div class="barra-carga"><div></div></div>
+  <p id="carga-txt">Abrindo…</p>
+</div>
+
+<!-- login -->
+<div id="tela-login" class="tela-centro" hidden>
+  <form id="form-login" class="cartao-login">
+    <img src="/img/logo_navy.png" alt="Contrato" class="logo-login">
+    <h1>Validador Tributário</h1>
+    <p class="mut">Entre com o seu usuário da nuvem (o mesmo do programa).</p>
+    <label>E-mail<input id="lg-email" type="email" autocomplete="username" required></label>
+    <label>Senha<input id="lg-senha" type="password" autocomplete="current-password" required></label>
+    <p id="lg-erro" class="erro" hidden></p>
+    <button class="pri grande" type="submit">Entrar</button>
+  </form>
+</div>
+
+<!-- aplicativo -->
+<div id="app" hidden>
+  <header id="topo">
+    <img src="/img/logo_navy.png" alt="Contrato" class="logo-topo">
+    <span class="topo-titulo">Validador Tributário</span>
+    <div class="busca-topo"><input id="busca" type="search" placeholder="Buscar empresa ou CNPJ…  ( / )"></div>
+    <div class="comp">
+      <span class="comp-rot">COMPETÊNCIA</span>
+      <button id="comp-ant" class="ico" title="Mês anterior">‹</button>
+      <button id="comp-rot" class="comp-mes" title="Escolher o mês"></button>
+      <input id="comp" type="month" class="comp-picker" tabindex="-1">
+      <button id="comp-prox" class="ico" title="Próximo mês">›</button>
+    </div>
+    <button id="bt-nuvem" class="nuvem" title="Sincronização com a nuvem"><span class="ponto"></span><span id="nuvem-txt">Nuvem</span></button>
+    <div class="menu-wrap">
+      <button id="bt-menu" class="ico" title="Mais opções">☰</button>
+      <div id="menu" class="menu" hidden>
+        <div class="menu-user" id="menu-user"></div>
+        <button data-acao="atualizar">Atualizar da nuvem</button>
+        <button data-acao="rel-carteira">Imprimir resumo da carteira</button>
+        <button data-acao="tamanho">Tamanho do texto: <b id="rot-tam"></b></button>
+        <button data-acao="sair">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="corpo">
+    <!-- tabela mestre -->
+    <section id="mestre">
+      <div id="mestre-compacto" class="barra-compacta" hidden>
+        <button id="bt-mostrar" class="sec">▾ Tabela de empresas</button>
+        <button id="c-ant" class="ico" title="Empresa anterior (Alt+←)">‹</button>
+        <div id="c-info" class="c-info"></div>
+        <button id="c-prox" class="ico" title="Próxima empresa (Alt+→)">›</button>
+        <button id="c-validar" class="sec">Validar</button>
+        <button id="c-pend" class="pri">Próxima pendente ›</button>
+      </div>
+      <div id="mestre-cheio">
+        <div class="filtros">
+          <div class="chips" id="chips">
+            <button data-f="pend">Pendentes</button>
+            <button data-f="sel">Selecionadas</button>
+            <button data-f="todas">Todas</button>
+            <button data-f="sn">Simples</button>
+            <button data-f="lp">Presumido</button>
+          </div>
+          <span class="flex1"></span>
+          <button id="bt-recolher" class="sec" hidden>▴ Recolher</button>
+          <button id="bt-proxima" class="pri" title="F8">Próxima pendente ›</button>
+        </div>
+        <div class="tabela-wrap" id="tabela-wrap">
+          <table id="tabela" class="grade">
+            <thead><tr>
+              <th data-c="ordem">Situação</th><th data-c="nome">Empresa</th><th data-c="cnpj" class="col-cnpj">CNPJ</th>
+              <th data-c="reg">Regime</th><th data-c="rec" class="n">Receita do mês</th><th data-c="calc" class="n">Tributos calc.</th>
+              <th data-c="decl" class="n">Declarado</th><th data-c="dif" class="n">Diferença</th><th data-c="fr" class="n">Fator R</th>
+              <th data-c="rbt" class="n">RBT12</th><th data-c="fx" class="n">Faixa</th><th data-c="pend">Principal pendência</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div id="totais" class="totais"></div>
+      </div>
+    </section>
+    <div id="divisor" title="Arraste para ajustar"></div>
+
+    <!-- empresa aberta -->
+    <section id="detalhe">
+      <div id="vazio" class="vazio">Escolha uma empresa na tabela.</div>
+      <div id="emp" hidden>
+        <div id="cab" class="cab">
+          <div class="cab-txt">
+            <h2 id="cab-nome"></h2>
+            <div id="cab-sub" class="mut"></div>
+          </div>
+          <div id="cab-chips" class="cab-chips"></div>
+          <span class="flex1"></span>
+          <button id="cab-validar" class="pri">Validar</button>
+        </div>
+        <nav id="abas" class="abas">
+          <button data-aba="resumo">Resumo</button>
+          <button data-aba="apuracao">Apuração</button>
+          <span class="flex1"></span>
+          <span class="mut aviso-desktop" title="Simulador, Notas, Obrigações, CND, Cadastro, IRPJ/CSLL trimestral e download de NFS-e com certificado continuam no programa desktop por enquanto.">Outras abas: no programa desktop</span>
+        </nav>
+        <div id="pag-resumo" class="pagina"></div>
+        <div id="pag-apuracao" class="pagina" hidden>
+          <div class="ap-barra">
+            <div>
+              <select id="ap-regime" title="Regime da empresa (vale para todas as competências)">
+                <option value="SN">Simples Nacional</option><option value="LP">Lucro Presumido</option><option value="OUTRO">Outro regime</option>
+              </select>
+              <div id="ap-sub" class="mut"></div>
+            </div>
+            <span class="flex1"></span>
+            <button id="ap-salvar" class="pri">Salvar apuração</button>
+            <button id="ap-ampliar" class="ico" title="Ampliar (F11 · Esc volta)">⛶</button>
+          </div>
+          <div id="passos" class="passos"></div>
+          <div id="faixa" class="faixa"></div>
+          <div id="etapa" class="etapa"></div>
+          <div class="rodape-ap">
+            <button id="et-ant" class="sec">← Etapa anterior</button>
+            <span id="et-status" class="mut flex1"></span>
+            <button id="et-prox" class="pri">Próxima etapa →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="toast" hidden></div>
+<div id="modal-fundo" hidden><div id="modal"></div></div>
+
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>
