@@ -1,0 +1,1228 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" id="meta-viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+/* Exibição escolhida pelo usuário (Computador ou Celular) — aplicada antes de desenhar, sem modo automático. */
+(function () {
+  var m = 'computador';
+  try { m = (JSON.parse(localStorage.getItem('vt_ui') || '{}').modo) || 'computador'; } catch (e) {}
+  if (m !== 'celular') m = 'computador';
+  window.__vtModo = m;
+  if (m === 'computador' && Math.min(screen.width, screen.height) < 820)   // telefone em modo computador: tela inteira, com zoom
+    document.getElementById('meta-viewport').setAttribute('content', 'width=1100');
+  document.documentElement.classList.add('modo-' + m);
+})();
+</script>
+<meta name="theme-color" content="#094488">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Validador">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<title>Validador Tributário · Contrato</title>
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAIiElEQVR42u2bb4xcVRnGf+855947s8tua0NbRZAqaAsarDESicZW2IjxXyS4hmBJ9IOBRD8ZMa1NbSKBEPU7mvhRg3Qxxlgw1SI0oiSYkFZg26pUKqX/oP+2nZ2Ze+85rx/u7Wy3ndndQmeWhXmTm8xOZmfmPOd5n/e9c55XOD9Gt1jGvu4BBm998MMh2FE0jCi6UmAJYHhrR1A4LshexGw3xo/Vtq1/8fy1nQ1pt/jksz+5xjj5Eaq346JBQgD1oIEFEWJALBgDeVZD5Lch1x83n/zBS+eDYFv/tGaz4/Hv+srIA3cZ634vLrmRkMX4zBcL1wsBe8uGKiEoIQ+IJBJVPiqEb7oPrH0133rPTtZsduzfEaYAGN1ii8U/+H3jBh5C8wTfzAFBxCDIwll8yWwpvzsoIfWIVI2r3mZXrK3lT256mtEtlvExlbOUqNzywDdMPPgrzRo5qgZ5y+f6RZKCgEiQqOJCWlvXeOKHv2Z0ixVQSW598Grj7QuIVAmet93izwXBWFCtB+s/0ty2fr8BUePlPokqg2ge2i9ez7s6EU/m95o9MQyaB4kqg8bLfSAq8Zr7V1lndyISdxI6FYeWTwsBUd9Wd8iyecx6AefAWghhZh4goJr63K92Ys2dRElC1vCI2HavrzQPl4tWgqmQRu+azgRViGPCVVfNSJBu8RoRSDPMsdeRyUk0SYrnVNvzQIMnqiSijTudMTJCCHohh5QgEZX0KFcc/UMprIHcDHLgPbfhTYKogjFIvU62Zg3Zp25C6imYeSgYISCnT2N37sQ9+2zRA3RMCxFCUGNkxKnqSlEvnYpcsfOmTIOiHxANZaYoqBabPjiIZB7J0uLDe7f/U4+Hhsg+N4IuW0a0dWuRDp2KpHpR1ZVORBaXHZ50+ghRX6IZEDVthTDLC1B0roJ0icKW+xAAvEcmzpCvvgFz5AjumWfQarWdJggaEJHFbqbeXsqcz6Lhgu54cjtMkGgqv0RQhVVJykEbCBJ61jIFhMncgIC1SkCKlGyk5KtXY3ftgjyfaUOMm7GZUk/mFnFg+VdL2pcVQSxSssCinPHC965s8JVPnOLYqQbOSs8A2FO33Le/ynOnI4zTolp5jw4PE5YswRw8CHHcSRBxc8kylYgg0mJFuxRQEZYnykAVrOl+xdOy+qwazFi7KOfmfw6x80yEMUooxZkomvW93FylRgjnKMiFt5PV2IFCqmC7XAp9rhgjiMCZVFgWKxvfV+drL0YtbZ5ruLm/1JQlX/GqU2W21Lx9hybIg87aLL7ZMAaGhxJq9QwflMhAPQgrBwKxU1ItvqleOgCKPTaaoapEzpEkCd7niAiqSpZE/PTRXTz6131dLADS2oCbV7+XzXd9nMgYsqAtFr6RzJsVABVh6fGnGWy8QhAHKOvW3cUHr/0QjUaDwYrjl08d5s+7jrH7lROzdKGXggHCC88fYqDieOBbN3JsolnWwjcWswIg6qk2D2LzGs7FnD49Qf3kYZYuup5TkrFkKOLa5RX+pDCYRPjQXQGwVqgNJfx9/AhZFsqmU7sHQMGCCBULGMREIIYsV/KgZLmS5lr+GFcqcDcrQAAfFGflkkiNmXvDqdOaT5EiK3vc+E27/6J3ALx9ow9AH4A+AH0A+gD0AegD0AegD0AfgD4AfQD6APQB6APQB6APQB+APgDvrHBcIpPCfPwy7IOWF+Re0RDKH7C1MMz2CoDYChoU2wNrjC0PRQEGhhKSyGAdLHUWN1ClWZ5MqTPdB8CIUE8DN14zzO8ur3LotXpxTKV03Qv8/H+P87OHn2P54grNNCAo7z+QsLtmMRZsrYY5erRwjs1wiODe2Pl86RWQgnpLhxz3j65gx+5TNPLQNYOIKkRO+M+ROv94aYJ7H/rbNKNQxSlJ4WgobEBxPGtuuov/EkozzVqPjYFmpiwdilj36WV0+zQodsKB4ynfeXWSPLbTjsI9Mv38ag4nte7ixE6x1jI+vpuRkVswxuC9R0RoZlBP864DEFmhmQesgUYWsHLOGaF0uQpoUCqVCnv37mbrY4/zpS9+oacW8oIBhklfL6yNF5QFP7XrIp1tchfnD3B4UyXiRIv2SRzzx8cfY9++fVx/3XU451DVntRCQyAeXo6xDk3TqV1XRS+7DJKk+DvPkYmJN6sBiopjsnIlA43/kUvcyrJKkvCv3eOMv/B8SxTpwRiAhoxoaBnpFbdjjLTMUhrHpHfcgQ4PF0wAkocfRg4fLsxSM7jEQueOUDAhZeKyVQxN/ps4PYY3FQRFFZJqlUpPk0AQPKmRwqJj4pZblSgqPMKt5iRGk9LO2zmCU9WTYuwSNGh7GQkEk3D48hHe/fp2kvS1Kfe477U3WkA9xrnCn/RmmlcxosGfdCKyF7GfJASlrWNYEM3I3CJeXfZlhmt7GKgfwIb6vPTuEnLqlStQiaYKoAhkGdJoTLEgTZFms70GKIqxiIS9LgTdbpy5Ca8zeFwF0RwVx4nhj3Fy6AZE81IPpPfzUMZNp7YIkqbEjzxSiKACvhTBtp2gKsaYkOv2OQ1MnO8f1lbRlXmbfelkmZ9DGZw2MGHSHRv3IIxJVC0SbA6e0XNqzzxdHS1kheJHUbHz7VfgJaoKwli6Y+MeAyrB6ibNGjXEmXIoYGGG6vSr7eSYM5o1asHqJlAxjI6Z5rYNL6vmd4uLDSJhQYMw29ici41qfndz24aXGR0zlvExZXSLzbfes8uuWFszrvp5CALhrNFeFvzSUY+xVlzFhLx+b+OJDb84Oy9ZqMT4mLJms8uf3PS0XfGZfSLuFomqVUIuqPrCEc0CGp1FC63WgBgj0YAhhAkNjW83tm/4+dkx4emzw/t3hJIJO+3VI2OCXwxcS5QkiCmZoCyQ4WnBOMFFhhBqqP9NyPXO5l/WP3V2TLjzDeQ7bHz+/2NdKLRGUmS5AAAAAElFTkSuQmCC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#094488;--navy2:#0b4f9c;--azul-claro:#e8f1fb;--txt:#0f172a;--txt2:#334155;--mut:#64748b;--borda:#e2e8f0;--borda2:#cbd5e1;
+--fundo:#f3f5f8;--branco:#fff;--bad:#b91c1c;--warn:#b45309;--ok:#047857;--fs:15px}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent}
+body{font-family:Inter,'Segoe UI',Arial,sans-serif;font-size:var(--fs);color:var(--txt);background:var(--fundo)}
+[hidden]{display:none!important}
+button{font:inherit;cursor:pointer;border-radius:9px;border:1px solid var(--borda2);background:#fff;color:var(--txt2);padding:7px 13px;font-weight:600}
+button:hover{background:#f1f5f9}
+button.pri{background:var(--navy);border-color:var(--navy);color:#fff}
+button.pri:hover{background:var(--navy2)}
+button.sec{background:#fff}
+button.ico{padding:6px 11px;font-size:1.1em;line-height:1}
+button.grande{padding:11px;font-size:1.05em}
+button:disabled{opacity:.45;cursor:default}
+input,select{font:inherit;color:var(--txt);border:1px solid var(--borda2);border-radius:8px;padding:7px 9px;background:#fff}
+input:focus,select:focus{outline:2px solid #94b8e4;border-color:var(--navy)}
+.mut{color:var(--mut)}
+.erro{color:var(--bad);font-weight:600}
+.flex1{flex:1}
+/* telas de carga e login */
+.tela-centro{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:var(--fundo)}
+.logo-grande{height:70px}
+.barra-carga{width:280px;height:6px;border-radius:3px;background:#dbe4ef;overflow:hidden}
+.barra-carga div{width:40%;height:100%;background:var(--navy);border-radius:3px;animation:vai 1.2s ease-in-out infinite}
+@keyframes vai{0%{margin-left:-40%}100%{margin-left:100%}}
+.cartao-login{background:#fff;border:1px solid var(--borda);border-radius:16px;padding:34px 38px;width:min(420px,92vw);display:flex;flex-direction:column;gap:14px}
+.cartao-login h1{margin:0;font-size:1.5em}
+.cartao-login label{display:flex;flex-direction:column;gap:5px;font-weight:600;color:var(--txt2)}
+.cartao-login input{padding:10px 12px}
+.logo-login{height:46px;align-self:flex-start}
+/* topo */
+#app{height:100%;display:flex;flex-direction:column}
+#topo{display:flex;align-items:center;gap:12px;padding:9px 18px;background:#fff;border-bottom:1px solid var(--borda);flex-wrap:wrap}
+.logo-topo{height:36px}
+.topo-titulo{font-weight:600;color:var(--txt2);font-size:1.05em;white-space:nowrap}
+.busca-topo{flex:1;min-width:180px;max-width:520px}
+.busca-topo input{width:100%;background:#f6f7f9;border-color:var(--borda);padding:9px 12px}
+.comp{display:flex;align-items:center;gap:4px;border:1px solid var(--borda);border-radius:10px;padding:3px 6px}
+.comp-rot{font-size:.72em;font-weight:700;color:var(--mut);padding:0 4px}
+.comp-mes{border:none;font-weight:700;font-size:1.05em;padding:4px 8px;min-width:96px;color:var(--txt)}
+.comp-picker{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;border:none;padding:0}
+.comp{position:relative}
+.nuvem{display:flex;align-items:center;gap:7px}
+.nuvem .ponto{width:9px;height:9px;border-radius:50%;background:#94a3b8}
+.nuvem.ok .ponto{background:#10b981}.nuvem.salvando .ponto{background:#f59e0b}.nuvem.erro .ponto{background:#ef4444}
+.menu-wrap{position:relative}
+.menu{position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--borda);border-radius:12px;box-shadow:0 10px 30px rgba(15,23,42,.12);
+ min-width:260px;padding:6px;z-index:30;display:flex;flex-direction:column}
+.menu button{border:none;text-align:left;border-radius:7px;font-weight:500}
+.menu-user{padding:8px 12px;color:var(--mut);font-size:.9em;border-bottom:1px solid var(--borda);margin-bottom:4px}
+/* corpo */
+#corpo{flex:1;display:flex;flex-direction:column;min-height:0}
+#mestre{background:#fff;border-bottom:1px solid var(--borda);display:flex;flex-direction:column;min-height:0;flex:0 0 auto}
+#mestre-cheio{display:flex;flex-direction:column;min-height:0;height:100%}
+#mestre.compacto{height:auto!important}
+#divisor{height:7px;cursor:row-resize;background:var(--borda);flex:0 0 auto}
+#divisor:hover{background:#94a3b8}
+.filtros{display:flex;align-items:center;gap:8px;padding:10px 16px 8px;flex-wrap:wrap}
+.chips{display:flex;gap:5px;flex-wrap:wrap}
+.chips button{border-radius:999px;background:#f1f5f9;border-color:transparent;padding:5px 13px;font-size:.93em}
+.chips button.on{background:var(--txt);color:#fff}
+.tabela-wrap{flex:1;overflow:auto;min-height:0;padding:0 16px}
+table.grade{width:100%;border-collapse:collapse;font-size:.95em}
+.grade th{position:sticky;top:0;background:#f8fafc;color:var(--mut);font-size:.85em;font-weight:700;text-align:left;padding:8px 9px;border-bottom:1px solid var(--borda2);
+ cursor:pointer;white-space:nowrap;user-select:none;z-index:1}
+.grade th.n,.grade td.n{text-align:right}
+.grade th.ord-asc::after{content:' ▲'}.grade th.ord-desc::after{content:' ▼'}
+.grade td{padding:7px 9px;border-bottom:1px solid #eef1f5;white-space:nowrap}
+.grade tbody tr{cursor:pointer}
+.grade tbody tr:hover{background:#f6f9fd}
+.grade tbody tr.sel{background:#dbe8f7}
+.grade tr.fora td{color:#94a3b8}
+.grade td.emp{font-weight:700;max-width:340px;overflow:hidden;text-overflow:ellipsis}
+.grade td.pend{max-width:320px;overflow:hidden;text-overflow:ellipsis}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:-1px}
+.c-bad{color:var(--bad)}.c-warn{color:var(--warn)}.c-ok{color:var(--ok)}.b{font-weight:700}
+.totais{padding:7px 18px 9px;color:var(--txt2);font-size:.9em}
+.barra-compacta{display:flex;align-items:center;gap:8px;padding:8px 16px}
+.c-info{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c-info b{font-size:1.08em}
+/* detalhe */
+#detalhe{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column}
+.vazio{margin:auto;color:var(--mut);font-size:1.1em}
+#emp{display:flex;flex-direction:column;min-height:100%}
+.cab{display:flex;align-items:center;gap:14px;padding:12px 22px 8px;flex-wrap:wrap}
+.cab h2{margin:0;font-size:1.35em}
+.cab-chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-block;border-radius:999px;padding:3px 11px;font-size:.84em;font-weight:700;background:#f1f5f9;color:#475569}
+.chip.erro{background:#fef2f2;color:var(--bad)}.chip.atencao{background:#fffbeb;color:#92400e}.chip.ok{background:#ecfdf5;color:var(--ok)}.chip.info{background:var(--azul-claro);color:var(--navy)}
+.abas{display:flex;align-items:center;gap:6px;padding:6px 20px 10px;border-bottom:1px solid var(--borda);background:#fff}
+.abas button{border:none;border-radius:999px;padding:8px 20px;font-size:1.02em;background:transparent}
+.abas button.on{background:var(--navy);color:#fff}
+.aviso-desktop{font-size:.85em}
+.pagina{padding:14px 18px;flex:1}
+/* resumo */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:12px 14px}
+.kpi .r{font-size:.78em;font-weight:700;color:var(--mut);letter-spacing:.3px;text-transform:uppercase}
+.kpi .v{font-size:1.35em;font-weight:700;margin-top:4px}
+.kpi .s{font-size:.85em;color:var(--mut);margin-top:2px}
+.bloco{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.bloco h3{margin:0 0 10px;font-size:1em;text-transform:uppercase;letter-spacing:.4px;color:var(--txt2)}
+.pend-item{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid #f1f5f9;cursor:pointer}
+.pend-item:hover{background:#f8fafc}
+/* apuração */
+.ap-barra{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--borda);border-radius:12px;padding:8px 12px;margin-bottom:8px}
+.passos{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:8px}
+.passos button{text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:9px 14px}
+.passos button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.faixa{display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border:1px solid var(--borda);border-radius:12px;margin-bottom:8px;overflow:hidden}
+.faixa>div{padding:7px 14px;border-right:1px solid #ecebe7}
+.faixa>div:first-child{background:#f8fafc}
+.faixa .r{font-size:.74em;font-weight:700;color:var(--mut);letter-spacing:.4px;text-transform:uppercase}
+.faixa .v{font-size:1.2em;font-weight:700}
+.faixa .s{font-size:.82em;color:var(--mut)}
+.etapa{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:14px 16px;flex:1;min-height:260px}
+.rodape-ap{display:flex;align-items:center;gap:10px;padding:10px 0 4px}
+.drop{border:2px dashed var(--borda2);border-radius:12px;padding:28px;text-align:center;color:var(--mut);background:#f8fafc}
+.drop.sobre{border-color:var(--navy);background:var(--azul-claro);color:var(--navy)}
+table.form{width:100%;border-collapse:collapse}
+.form th{font-size:.82em;color:var(--mut);text-align:left;padding:6px;border-bottom:1px solid var(--borda)}
+.form td{padding:4px 6px;border-bottom:1px solid #f1f5f9}
+.form input[type=text],.form input:not([type]){width:100%}
+.form input.n{text-align:right}
+.form td.c{text-align:center}
+.linha-campos{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;margin:12px 0}
+.linha-campos label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:.9em;color:var(--txt2)}
+.origem{font-size:.8em;color:var(--mut)}
+/* HTML vindo do motor (memória, validação, histórico) */
+.doc{font-size:.95em;line-height:1.45}
+.doc table{border-collapse:collapse}
+.doc td,.doc th{padding:4px 8px}
+.doc th{background:#f1f5f9;color:var(--mut);font-size:.85em;text-align:left}
+.doc .n{text-align:right}.doc .tot{background:#e2e8f0;font-weight:700}.doc .mut{color:var(--mut)}
+.doc .bad{color:var(--bad);font-weight:700}.doc .okc{color:var(--ok);font-weight:700}.doc .formula{background:#f1f5f9}
+.doc h3{font-size:.95em;text-transform:uppercase;margin:16px 0 6px;color:#1e293b}.doc h4{font-size:1.05em;margin:16px 0 6px}
+.doc a{color:var(--navy);font-weight:700;text-decoration:none}
+.doc a:hover{text-decoration:underline}
+/* modo ampliado */
+body.ampliado #mestre,body.ampliado #divisor,body.ampliado #cab,body.ampliado #abas{display:none!important}
+/* toast e modal */
+#toast{position:fixed;right:18px;bottom:18px;background:var(--txt);color:#fff;padding:12px 16px;border-radius:10px;max-width:420px;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+#modal-fundo{position:fixed;inset:0;background:rgba(15,23,42,.45);display:flex;align-items:center;justify-content:center;z-index:40}
+#modal{background:#fff;border-radius:14px;padding:20px 22px;width:min(560px,94vw);max-height:88vh;overflow:auto}
+#modal h3{margin:0 0 10px}
+#modal textarea{width:100%;min-height:110px;font:inherit;padding:9px;border:1px solid var(--borda2);border-radius:8px}
+.modal-bts{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+@media (max-width:1100px){.col-cnpj{display:none}.topo-titulo{display:none}}
+
+/* ================= modo celular (menu ☰ › Exibição, ou automático em tela estreita) ================= */
+.so-cel{display:none}
+body.cel .so-pc{display:none}
+body.cel .so-cel{display:inline-block}
+.cards{display:none}
+body.cel #topo{padding:8px 10px;gap:8px}
+body.cel .logo-topo{height:22px}
+body.cel .topo-titulo{display:none}
+body.cel .busca-topo{order:9;flex:1 1 0;max-width:none;min-width:0}
+body.cel .topo-modo{order:10}
+body.cel .busca-topo,body.cel .topo-modo{margin-top:2px}
+body.cel #topo::after{content:'';order:8;flex-basis:100%;height:0}
+body.cel .comp{margin-left:auto;padding:1px 2px;gap:2px}
+body.cel .comp button.ico{padding:4px 8px;min-height:34px}
+body.cel .comp-rot{display:none}
+body.cel .comp-mes{min-width:76px;padding:4px}
+body.cel .nuvem{padding:6px 9px;min-height:34px}
+body.cel #bt-menu{min-height:34px}
+body.cel #nuvem-txt{display:none}
+body.cel #corpo{display:block;min-height:0}
+body.cel #app{height:auto;min-height:100%}
+body.cel #mestre{height:auto!important;border:none;background:transparent}
+body.cel #divisor,body.cel #mestre-compacto,body.cel .tabela-wrap,body.cel #bt-recolher,body.cel #bt-proxima,body.cel .aviso-desktop,body.cel #ap-ampliar{display:none!important}
+body.cel .filtros{padding:10px 10px 4px;gap:8px}
+body.cel .chips{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+body.cel .chips button{white-space:nowrap}
+body.cel .cards{display:flex;flex-direction:column;gap:8px;padding:6px 10px 10px}
+.card{background:#fff;border:1px solid var(--borda);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;cursor:pointer}
+.card:active{background:#f1f5f9}
+.card.sel{border-color:var(--navy);box-shadow:0 0 0 1px var(--navy)}
+.card.fora{opacity:.6}
+.card-top{display:flex;align-items:center;gap:8px}
+.card-nome{font-weight:700;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-sit{font-size:.82em;color:var(--mut);white-space:nowrap}
+.card-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.card-nums div{background:#f8fafc;border-radius:8px;padding:5px 8px}
+.card-nums .r{font-size:.68em;font-weight:700;color:var(--mut);text-transform:uppercase}
+.card-nums .v{font-weight:700;font-size:.92em}
+.card-pend{font-size:.86em}
+body.cel .totais{padding:4px 12px 16px;font-size:.85em}
+body.cel #detalhe{overflow:visible}
+body.cel .cab{padding:10px 12px 6px;gap:8px}
+body.cel .cab h2{font-size:1.1em}
+body.cel #cab-validar{display:none}
+body.cel .abas{position:sticky;top:0;z-index:15;padding:6px 10px 8px;overflow-x:auto}
+body.cel .pagina{padding:10px}
+body.cel .kpis{grid-template-columns:repeat(2,1fr);gap:8px}
+body.cel .kpi .v{font-size:1.1em}
+body.cel .bloco{padding:12px;overflow-x:auto}
+body.cel .ap-barra{flex-wrap:wrap}
+body.cel .passos{display:flex;overflow-x:auto;gap:6px;-webkit-overflow-scrolling:touch}
+body.cel .passos button{flex:0 0 auto;padding:8px 12px}
+body.cel .faixa{grid-template-columns:repeat(2,1fr)}
+body.cel .faixa>div:first-child{grid-column:1/-1}
+body.cel .etapa{padding:12px;min-height:0;overflow-x:auto}
+body.cel .drop{padding:18px 12px}
+body.cel .linha-campos{flex-direction:column;align-items:stretch}
+body.cel .linha-campos input{width:100%}
+body.cel .rodape-ap{position:sticky;bottom:0;background:var(--fundo);padding:8px 0 calc(8px + env(safe-area-inset-bottom));z-index:10}
+body.cel #et-status{display:none}
+body.cel .rodape-ap button{flex:1}
+/* tabelas de lançamento viram blocos empilhados */
+body.cel #tb-rec tr:first-child,body.cel #tb-meses tr:first-child{display:none}
+body.cel #tb-rec,body.cel #tb-rec tbody,body.cel #tb-meses,body.cel #tb-meses tbody{display:block}
+body.cel #tb-rec tr{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;padding:10px 0;border-bottom:1px solid var(--borda)}
+body.cel #tb-rec td{border:none;padding:0}
+body.cel #tb-rec td:nth-child(1){grid-column:1/-1}
+body.cel #tb-rec td:nth-child(2){grid-column:1/2}
+body.cel #tb-rec td:nth-child(3){grid-column:2/-1}
+body.cel #tb-rec td.c{display:flex;flex-direction:column;align-items:center;font-size:.75em;color:var(--mut)}
+body.cel #tb-rec td.c::before{content:attr(data-r)}
+body.cel #tb-rec td:last-child{grid-column:1/-1;text-align:right}
+body.cel #tb-meses tr{display:grid;grid-template-columns:1fr 1fr;gap:4px 8px;padding:8px 0;border-bottom:1px solid var(--borda)}
+body.cel #tb-meses td{border:none;padding:0}
+body.cel #tb-meses td:nth-child(1){grid-column:1/-1}
+body.cel #tb-meses td:nth-child(3),body.cel #tb-meses td:nth-child(5){display:none}
+body.cel #tb-meses td[data-r]::before{content:attr(data-r);display:block;font-size:.72em;color:var(--mut);font-weight:700}
+body.cel .doc table{font-size:.88em}
+body.cel input,body.cel select,body.cel button{font-size:16px}
+body.cel #modal{width:100%;max-height:92vh;border-radius:16px 16px 0 0;align-self:flex-end}
+body.cel #modal-fundo{align-items:flex-end}
+body.cel #toast{left:10px;right:10px;bottom:calc(70px + env(safe-area-inset-bottom));max-width:none}
+body.cel .menu{position:fixed;left:8px;right:8px;top:56px;min-width:0}
+
+/* seletor Computador / Celular (escolha do usuário, sem automático) */
+.seg-modo{display:inline-flex;border:1px solid var(--borda2);border-radius:10px;overflow:hidden;background:#fff}
+.seg-modo button{border:none;border-radius:0;padding:6px 11px;font-size:.88em;background:#fff;color:var(--txt2)}
+.seg-modo button+button{border-left:1px solid var(--borda2)}
+.seg-modo button.on{background:var(--navy);color:#fff}
+.exib-login{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+body.cel .topo-modo span{display:none}
+body.cel .topo-modo button{padding:6px 10px;font-size:1.05em}
+/* iPhone 15 e parecidos: ilha dinâmica, barra inferior, sem zoom ao digitar */
+body.cel #topo{padding-top:calc(8px + env(safe-area-inset-top));padding-left:calc(10px + env(safe-area-inset-left));padding-right:calc(10px + env(safe-area-inset-right))}
+body.cel .tela-centro{padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom)}
+body.cel .cartao-login{padding:26px 22px;width:100%}
+body.cel .cards{padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+body.cel #app{min-height:100dvh}
+body.cel{overscroll-behavior-y:none}
+body.cel input,body.cel select,body.cel textarea{font-size:16px}
+body.cel button{min-height:40px}
+body.cel .card-nome{font-size:1.02em}
+@supports (-webkit-touch-callout:none){body.cel .rodape-ap{padding-bottom:calc(10px + env(safe-area-inset-bottom))}}
+
+</style>
+</head>
+<body>
+
+<!-- carregando -->
+<script>window.__LOGO="data:image/png;base64,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";document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("img[data-logo]").forEach(function(i){i.src=window.__LOGO})});</script>
+<div id="tela-carga" class="tela-centro">
+  <img src="" data-logo alt="Contrato" class="logo-grande">
+  <div class="barra-carga"><div></div></div>
+  <p id="carga-txt">Abrindo…</p>
+</div>
+
+<!-- login -->
+<div id="tela-login" class="tela-centro" hidden>
+  <form id="form-login" class="cartao-login">
+    <img src="" data-logo alt="Contrato" class="logo-login">
+    <h1>Validador Tributário</h1>
+    <p class="mut">Entre com o seu usuário da nuvem (o mesmo do programa).</p>
+    <label>E-mail<input id="lg-email" type="email" autocomplete="username" required></label>
+    <label>Senha<input id="lg-senha" type="password" autocomplete="current-password" required></label>
+    <p id="lg-erro" class="erro" hidden></p>
+    <button class="pri grande" type="submit">Entrar</button>
+    <div class="exib-login"><span class="mut">Exibir como</span>
+      <div class="seg-modo"><button type="button" data-m="computador">🖥 Computador</button><button type="button" data-m="celular">📱 Celular</button></div></div>
+  </form>
+</div>
+
+<!-- aplicativo -->
+<div id="app" hidden>
+  <header id="topo">
+    <img src="" data-logo alt="Contrato" class="logo-topo">
+    <span class="topo-titulo">Validador Tributário</span>
+    <div class="busca-topo"><input id="busca" type="search" placeholder="Buscar empresa ou CNPJ…  ( / )"></div>
+    <div class="comp">
+      <span class="comp-rot">COMPETÊNCIA</span>
+      <button id="comp-ant" class="ico" title="Mês anterior">‹</button>
+      <button id="comp-rot" class="comp-mes" title="Escolher o mês"></button>
+      <input id="comp" type="month" class="comp-picker" tabindex="-1">
+      <button id="comp-prox" class="ico" title="Próximo mês">›</button>
+    </div>
+    <div class="seg-modo topo-modo" title="Como exibir o site neste aparelho"><button type="button" data-m="computador" title="Exibir como computador">🖥<span> Computador</span></button><button type="button" data-m="celular" title="Exibir como celular">📱<span> Celular</span></button></div>
+    <button id="bt-nuvem" class="nuvem" title="Sincronização com a nuvem"><span class="ponto"></span><span id="nuvem-txt">Nuvem</span></button>
+    <div class="menu-wrap">
+      <button id="bt-menu" class="ico" title="Mais opções">☰</button>
+      <div id="menu" class="menu" hidden>
+        <div class="menu-user" id="menu-user"></div>
+        <button data-acao="atualizar">Atualizar da nuvem</button>
+        <button data-acao="rel-carteira">Imprimir resumo da carteira</button>
+        <button data-acao="tamanho">Tamanho do texto: <b id="rot-tam"></b></button>
+        <button data-acao="modo">Exibição: <b id="rot-modo"></b> (trocar)</button>
+        <button data-acao="sair">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="corpo">
+    <!-- tabela mestre -->
+    <section id="mestre">
+      <div id="mestre-compacto" class="barra-compacta" hidden>
+        <button id="bt-mostrar" class="sec">▾ Tabela de empresas</button>
+        <button id="c-ant" class="ico" title="Empresa anterior (Alt+←)">‹</button>
+        <div id="c-info" class="c-info"></div>
+        <button id="c-prox" class="ico" title="Próxima empresa (Alt+→)">›</button>
+        <button id="c-validar" class="sec">Validar</button>
+        <button id="c-pend" class="pri">Próxima pendente ›</button>
+      </div>
+      <div id="mestre-cheio">
+        <div class="filtros">
+          <div class="chips" id="chips">
+            <button data-f="pend">Pendentes</button>
+            <button data-f="sel">Selecionadas</button>
+            <button data-f="todas">Todas</button>
+            <button data-f="sn">Simples</button>
+            <button data-f="lp">Presumido</button>
+          </div>
+          <select id="sel-ordem" class="so-cel" title="Ordenar">
+            <option value="ordem:1">Ordem: situação</option><option value="nome:1">Ordem: nome</option>
+            <option value="dif:-1">Ordem: maior diferença</option><option value="rec:-1">Ordem: maior receita</option>
+          </select>
+          <span class="flex1"></span>
+          <button id="bt-recolher" class="sec" hidden>▴ Recolher</button>
+          <button id="bt-proxima" class="pri" title="F8">Próxima pendente ›</button>
+        </div>
+        <div class="tabela-wrap" id="tabela-wrap">
+          <table id="tabela" class="grade">
+            <thead><tr>
+              <th data-c="ordem">Situação</th><th data-c="nome">Empresa</th><th data-c="cnpj" class="col-cnpj">CNPJ</th>
+              <th data-c="reg">Regime</th><th data-c="rec" class="n">Receita do mês</th><th data-c="calc" class="n">Tributos calc.</th>
+              <th data-c="decl" class="n">Declarado</th><th data-c="dif" class="n">Diferença</th><th data-c="fr" class="n">Fator R</th>
+              <th data-c="rbt" class="n">RBT12</th><th data-c="fx" class="n">Faixa</th><th data-c="pend">Principal pendência</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div id="cards" class="cards"></div>
+        <div id="totais" class="totais"></div>
+      </div>
+    </section>
+    <div id="divisor" title="Arraste para ajustar"></div>
+
+    <!-- empresa aberta -->
+    <section id="detalhe">
+      <div id="vazio" class="vazio">Escolha uma empresa na tabela.</div>
+      <div id="emp" hidden>
+        <div id="cab" class="cab">
+          <button id="bt-voltar" class="sec so-cel">‹ Empresas</button>
+          <div class="cab-txt">
+            <h2 id="cab-nome"></h2>
+            <div id="cab-sub" class="mut"></div>
+          </div>
+          <div id="cab-chips" class="cab-chips"></div>
+          <span class="flex1"></span>
+          <button id="cab-validar" class="pri">Validar</button>
+        </div>
+        <nav id="abas" class="abas">
+          <button data-aba="resumo">Resumo</button>
+          <button data-aba="apuracao">Apuração</button>
+          <span class="flex1"></span>
+          <span class="mut aviso-desktop" title="Simulador, Notas, Obrigações, CND, Cadastro, IRPJ/CSLL trimestral e download de NFS-e com certificado continuam no programa desktop por enquanto.">Outras abas: no programa desktop</span>
+        </nav>
+        <div id="pag-resumo" class="pagina"></div>
+        <div id="pag-apuracao" class="pagina" hidden>
+          <div class="ap-barra">
+            <div>
+              <select id="ap-regime" title="Regime da empresa (vale para todas as competências)">
+                <option value="SN">Simples Nacional</option><option value="LP">Lucro Presumido</option><option value="OUTRO">Outro regime</option>
+              </select>
+              <div id="ap-sub" class="mut"></div>
+            </div>
+            <span class="flex1"></span>
+            <button id="ap-salvar" class="pri">Salvar apuração</button>
+            <button id="ap-ampliar" class="ico" title="Ampliar (F11 · Esc volta)">⛶</button>
+          </div>
+          <div id="passos" class="passos"></div>
+          <div id="faixa" class="faixa"></div>
+          <div id="etapa" class="etapa"></div>
+          <div class="rodape-ap">
+            <button id="et-ant" class="sec">← Etapa anterior</button>
+            <span id="et-status" class="mut flex1"></span>
+            <button id="et-prox" class="pri">Próxima etapa →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="toast" hidden></div>
+<div id="modal-fundo" hidden><div id="modal"></div></div>
+
+<script>
+/* Vigia de abertura: se algo impedir o site de abrir, mostra o motivo na tela (em vez de ficar parado em "Abrindo…"). */
+(function () {
+  var erros = [];
+  function mostrar(titulo) {
+    if (window.__vtAberto) return;
+    var t = document.getElementById('carga-txt');
+    if (!t) return;
+    t.innerHTML = '<b style="color:#b91c1c">' + titulo + '</b><br><span style="font-size:13px;color:#475569">' +
+      (erros.length ? erros.slice(0, 3).join('<br>') + '<br><br>' : '') +
+      'Confira a internet, desative bloqueadores de anúncio para este site e aperte Ctrl+F5. ' +
+      'Se continuar, mande um print desta tela.</span>';
+    var b = document.querySelector('.barra-carga'); if (b) b.style.display = 'none';
+  }
+  window.addEventListener('error', function (e) {
+    var alvo = e.target && (e.target.src || e.target.href);
+    erros.push(alvo ? 'Não carregou: ' + alvo : (e.message || 'erro'));
+  }, true);
+  window.addEventListener('unhandledrejection', function (e) { erros.push(String(e.reason && e.reason.message || e.reason)); });
+  window.__vtFalhou = function (m) { erros.unshift(m); mostrar('O site não conseguiu abrir.'); };
+  setTimeout(function () { mostrar('O site está demorando para abrir.'); }, 45000);
+})();
+</script>
+<script id="codigo-worker" type="text/plain">
+/* Worker do motor: carrega o Pyodide + o motor do Validador (motor.zip) e executa as chamadas da tela
+   sem travar a página. Mensagens: {id, fn, args} → {id, ok, valor | erro}. */
+self.ORIGEM = '';
+const PYODIDE = 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/';
+importScripts(PYODIDE + 'pyodide.js');
+
+let web = null;
+let pronto = null;
+
+async function iniciar(versao, motor) {
+  self.postMessage({ tipo: 'progresso', txt: 'Carregando o Python no navegador…' });
+  const py = await loadPyodide({ indexURL: PYODIDE });
+  self.postMessage({ tipo: 'progresso', txt: 'Carregando o motor de cálculo…' });
+  let dados = motor;                       // versão de arquivo único: o motor vem junto do index.html
+  if (!dados) {
+    // 1º: motor.zip ao lado do index.html · 2º/3º: cópia no repositório público do GitHub (funciona em qualquer projeto do Vercel)
+    const v = encodeURIComponent(versao || '');
+    const fontes = ['/motor.zip?v=' + v,
+      'https://cdn.jsdelivr.net/gh/godimay5-create/validador-web-1@main/motor.zip?v=' + v,
+      'https://raw.githubusercontent.com/godimay5-create/validador-web-1/main/motor.zip'];
+    const falhas = [];
+    for (const u of fontes) {
+      try {
+        const r = await fetch(u.startsWith('/') ? (self.ORIGEM || '') + u : u);
+        if (!r.ok) { falhas.push(u.split('?')[0] + ' → ' + r.status); continue; }
+        const b = new Uint8Array(await r.arrayBuffer());
+        if (b[0] !== 0x50 || b[1] !== 0x4b) { falhas.push(u.split('?')[0] + ' → não é zip'); continue; }   // "PK": é zip de verdade
+        dados = b; break;
+      } catch (e) { falhas.push(u.split('?')[0] + ' → ' + (e.message || e)); }
+    }
+    if (!dados) throw new Error('Não consegui baixar o motor (motor.zip). Tentei: ' + falhas.join(' | '));
+  }
+  py.unpackArchive(dados, 'zip', { extractDir: '/app' });
+  py.runPython("import sys; sys.path.insert(0, '/app')");
+  self.py = py;
+  web = py.pyimport('web');
+  self.postMessage({ tipo: 'progresso', txt: 'Motor pronto.' });
+}
+
+async function garantirPdf() {
+  // PDF do PGDAS-D: o motor usa pypdf (puro Python), instalado só quando aparece um PDF
+  if (self._pypdf) return;
+  await self.py.loadPackage('micropip');
+  const micropip = self.py.pyimport('micropip');
+  try { await micropip.install(self.location.origin + '/pypdf-5.9.0-py3-none-any.whl'); }   // cópia no próprio site
+  catch (_) { await micropip.install('pypdf'); }                                            // senão, do PyPI
+  self._pypdf = true;
+}
+
+self.onmessage = async (ev) => {
+  const { id, fn, args, versao, motor, origem } = ev.data;
+  if (origem) self.ORIGEM = origem;
+  try {
+    if (fn === '__iniciar') {
+      pronto = pronto || iniciar(versao, motor);
+      await pronto;
+      return self.postMessage({ id, ok: true, valor: null });
+    }
+    await pronto;
+    let valor;
+    if (fn === 'importar') {
+      const lista = args[0];
+      if (lista.some(([n]) => /\.(pdf|zip)$/i.test(n))) await garantirPdf();
+      const pyLista = self.py.toPy(lista.map(([n, b]) => [n, b]));
+      valor = web.importar(pyLista);
+      pyLista.destroy();
+    } else if (fn === 'iniciar') {
+      valor = web.iniciar(args[0], args[1], args[2], (cfg) => self.postMessage({ tipo: 'cfg', cfg }));
+    } else {
+      valor = web[fn](...args);
+    }
+    self.postMessage({ id, ok: true, valor });
+  } catch (e) {
+    self.postMessage({ id, ok: false, erro: String(e && e.message || e) });
+  }
+};
+
+</script>
+<script type="module">
+const LOGO = window.__LOGO;
+// Validador Tributário — versão web. Telas em JavaScript; cálculos no MESMO Python do programa desktop
+// (rodando no navegador pelo Pyodide, dentro de motor-worker.js). Dados: Supabase (carteira + simples_dados).
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
+// Projeto Supabase (o mesmo do programa desktop). A chave é a pública ("publishable"):
+// o acesso aos dados depende do login, por causa das políticas do seguranca_supabase.sql.
+const CONFIG = {
+  url: 'https://naljpkfxtfrwdvzbfcry.supabase.co',
+  chave: 'sb_publishable_1hv2t1uxAhAMc20bn-6ZKQ_7saYcfKP',
+  tabelaCarteira: 'companies',
+  colNome: 'razao_social',
+  tabelaNuvem: 'simples_dados',
+  versao: '1.0.0',          // mude ao publicar um motor novo (força o navegador a baixar o motor.zip de novo)
+};
+
+
+const sb = createClient(CONFIG.url, CONFIG.chave, { auth: { persistSession: true, autoRefreshToken: true } });
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+
+// ------------------------------------------------------------------ motor (worker com Pyodide)
+const worker = new Worker(URL.createObjectURL(new Blob([document.getElementById('codigo-worker').textContent], { type: 'text/javascript' })));
+let seq = 0;
+const esperando = new Map();
+worker.onmessage = (ev) => {
+  const d = ev.data;
+  if (d.tipo === 'progresso') return setCarga(d.txt);
+  if (d.tipo === 'cfg') { try { localStorage.setItem('vt_cfg', d.cfg); } catch (_) {} return; }
+  const p = esperando.get(d.id);
+  if (!p) return;
+  esperando.delete(d.id);
+  d.ok ? p.res(d.valor) : p.rej(new Error(d.erro));
+};
+function chamar(fn, ...args) {
+  return new Promise((res, rej) => {
+    const id = ++seq;
+    esperando.set(id, { res, rej });
+    worker.postMessage({ id, fn, args, versao: CONFIG.versao, origem: location.origin });
+  });
+}
+async function M(fn, ...args) {
+  const v = await chamar(fn, ...args);
+  return v == null ? null : JSON.parse(v);
+}
+const motorPronto = chamar('__iniciar');
+
+// ------------------------------------------------------------------ utilidades
+const nf = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const fmt = (v) => (v == null || v === '' ? '—' : nf.format(v));
+const brl = (v) => (v == null ? '—' : 'R$ ' + nf.format(v));
+const pct = (v, d = 1) => (v == null ? '—' : (v * 100).toFixed(d).replace('.', ',') + '%');
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const PONTO = { erro: '#ef4444', alterada: '#ef4444', revisao: '#f59e0b', pronta: '#3b82f6', nao: '#cbd5e1', validada: '#10b981', ressalva: '#10b981', fora: '#e2e8f0' };
+const CLS = { erro: 'erro', alterada: 'erro', revisao: 'atencao', pronta: 'info', validada: 'ok', ressalva: 'ok' };
+const REG = { SN: 'Simples', LP: 'Presumido', OUTRO: 'Outro' };
+const mesAdd = (c, n) => { const [a, m] = c.split('-').map(Number); const d = new Date(a, m - 1 + n, 1); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; };
+const MESES = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+const nomeMes = (c) => { const [a, m] = c.split('-'); return `${MESES[+m - 1]}/${a}`; };
+
+function setCarga(txt) { const el = $('#carga-txt'); if (el) el.textContent = txt; }
+let tToast;
+function avisar(txt, ms = 3500) {
+  const t = $('#toast');
+  t.textContent = txt; t.hidden = false;
+  clearTimeout(tToast); tToast = setTimeout(() => (t.hidden = true), ms);
+}
+function modal(html, aoAbrir) {
+  $('#modal').innerHTML = html;
+  $('#modal-fundo').hidden = false;
+  aoAbrir && aoAbrir($('#modal'));
+}
+const fecharModal = () => ($('#modal-fundo').hidden = true);
+$('#modal-fundo').addEventListener('click', (e) => { if (e.target.id === 'modal-fundo') fecharModal(); });
+
+// ------------------------------------------------------------------ estado da tela (preferências ficam neste navegador)
+const P = (() => { try { return JSON.parse(localStorage.getItem('vt_ui') || '{}'); } catch (_) { return {}; } })();
+const UI = {
+  filtro: P.filtro || 'sel', busca: '', ordem: P.ordem || { c: 'ordem', dir: 1 }, atual: null, aba: P.aba || 'resumo', etapa: 1,
+  tabelaAberta: !!P.tabelaAberta, alturaMestre: P.alturaMestre || null, fs: P.fs || 15, emp: null, linhas: [],
+  modo: P.modo === 'celular' ? 'celular' : 'computador', telaCel: 'lista',
+};
+const gravarUI = () => { try { localStorage.setItem('vt_ui', JSON.stringify({ filtro: UI.filtro, ordem: UI.ordem, aba: UI.aba, tabelaAberta: UI.tabelaAberta, alturaMestre: UI.alturaMestre, fs: UI.fs, modo: UI.modo })); } catch (_) {} };
+/** Celular: escolhido no menu, ou automático quando a tela é estreita (telefone / janela pequena). */
+const MODOS = { computador: 'Computador', celular: 'Celular' };
+const ehCel = () => UI.modo === 'celular';            // só o que o usuário escolheu (sem automático)
+function trocarModo(m) {
+  if (!MODOS[m] || m === UI.modo) return;
+  UI.modo = m; gravarUI();
+  const telefone = Math.min(screen.width, screen.height) < 820;
+  const vp = document.getElementById('meta-viewport');
+  if (vp) vp.setAttribute('content', m === 'computador' && telefone ? 'width=1100' : 'width=device-width, initial-scale=1, viewport-fit=cover');
+  document.documentElement.classList.toggle('modo-celular', m === 'celular');
+  document.documentElement.classList.toggle('modo-computador', m === 'computador');
+  aplicarLayout();
+  if (!$('#app').hidden) avisar('Exibindo como ' + MODOS[m].toLowerCase() + '.');
+}
+document.addEventListener('click', (e) => { const b = e.target.closest('.seg-modo button[data-m]'); if (b) trocarModo(b.dataset.m); });
+function marcarModo() {
+  document.body.classList.toggle('cel', ehCel());
+  $$('.seg-modo button').forEach((b) => b.classList.toggle('on', b.dataset.m === UI.modo));
+}
+marcarModo();
+document.documentElement.style.setProperty('--fs', UI.fs + 'px');
+
+// ------------------------------------------------------------------ Supabase: leitura paginada
+async function lerTudo(tabela, colunas, ordem, lote) {
+  const out = [];
+  for (let i = 0; ; i += lote) {
+    const { data, error } = await sb.from(tabela).select(colunas).order(ordem).range(i, i + lote - 1);
+    if (error) throw new Error(traduz(error.message, tabela));
+    out.push(...data);
+    if (data.length < lote) return out;
+  }
+}
+function traduz(m, tabela) {
+  if (/Invalid login credentials/.test(m)) return 'E-mail ou senha não conferem (usuário de Authentication → Users do Supabase).';
+  if (/Email not confirmed/.test(m)) return 'Este e-mail ainda não foi confirmado no Supabase.';
+  if (/JWT expired/.test(m)) return 'A sessão expirou. Entre de novo.';
+  if (/does not exist|Could not find the table/.test(m)) return `A tabela "${tabela}" não existe no banco.`;
+  if (/permission denied|row-level security/.test(m)) return 'Sem permissão no banco: confira se está logado e as políticas do seguranca_supabase.sql.';
+  return m;
+}
+
+// ------------------------------------------------------------------ envio para a nuvem (mesmo formato do .exe)
+let tEnvio = null, enviando = false, sujo = false;
+function setNuvem(st, det = '') {
+  const b = $('#bt-nuvem');
+  b.className = 'nuvem ' + st;
+  $('#nuvem-txt').textContent = { ok: 'Salvo na nuvem', salvando: 'Salvando…', pendente: 'Alterações pendentes', erro: 'Erro ao salvar' }[st] || st;
+  b.title = det || 'Sincronização com a nuvem (simples_dados)';
+}
+function marcarSujo() {
+  sujo = true; setNuvem('pendente');
+  clearTimeout(tEnvio); tEnvio = setTimeout(enviar, 1200);
+}
+async function enviar() {
+  if (enviando) { clearTimeout(tEnvio); tEnvio = setTimeout(enviar, 800); return; }
+  enviando = true;
+  let pac = null;
+  try {
+    pac = await M('pacote');
+    sujo = false;
+    if (!pac || (!pac.sobe.length && !pac.apaga.length)) { setNuvem('ok'); return; }
+    setNuvem('salvando');
+    let i = 0;
+    while (i < pac.sobe.length) {
+      const lote = []; let t = 0;
+      while (i < pac.sobe.length && (!lote.length || t + pac.sobe[i].txt.length < 1.5e6)) {
+        const x = pac.sobe[i++]; t += x.txt.length;
+        lote.push({ chave: x.chave, dados: JSON.parse(x.txt), atualizado_em: x.atualizado_em });
+      }
+      const { error } = await sb.from(CONFIG.tabelaNuvem).upsert(lote, { onConflict: 'chave' });
+      if (error) throw new Error(traduz(error.message, CONFIG.tabelaNuvem));
+    }
+    if (pac.apaga.length) {
+      const { error } = await sb.from(CONFIG.tabelaNuvem).delete().in('chave', pac.apaga);
+      if (error) throw new Error(traduz(error.message, CONFIG.tabelaNuvem));
+    }
+    await M('confirmar', JSON.stringify({ sobe: pac.sobe.map((x) => [x.chave, x.h]), apaga: pac.apaga }));
+    setNuvem(sujo ? 'pendente' : 'ok');
+  } catch (e) {
+    if (pac) await M('falhou', JSON.stringify(pac.cats));
+    setNuvem('erro', String(e.message || e));
+    avisar('Não salvou na nuvem: ' + (e.message || e) + ' — tento de novo em 20 s.', 6000);
+    clearTimeout(tEnvio); tEnvio = setTimeout(enviar, 20000);
+  } finally { enviando = false; }
+}
+window.addEventListener('beforeunload', (e) => {
+  if ($('#bt-nuvem').classList.contains('pendente') || $('#bt-nuvem').classList.contains('salvando') || enviando) { e.preventDefault(); e.returnValue = ''; }
+});
+/** Executa uma ação que muda dados e, depois, envia para a nuvem e redesenha. */
+async function mudar(fn, ...args) {
+  const r = await M(fn, ...args);
+  if (r && r.ok === false) { avisar(r.erro, 5000); return r; }
+  marcarSujo();
+  await redesenhar();
+  return r;
+}
+
+// ------------------------------------------------------------------ início
+async function abrir() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) return mostrarLogin();
+  try { await carregar(session); } catch (e) {
+    console.error(e);
+    mostrarLogin(String(e.message || e));
+  }
+}
+function mostrarLogin(erro) {
+  window.__vtAberto = true;
+  $('#tela-carga').hidden = true; $('#app').hidden = true; $('#tela-login').hidden = false;
+  const el = $('#lg-erro'); el.hidden = !erro; el.textContent = erro || '';
+  $('#lg-email').focus();
+}
+$('#form-login').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  const bt = $('#form-login button'); bt.disabled = true; bt.textContent = 'Entrando…';
+  const { data, error } = await sb.auth.signInWithPassword({ email: $('#lg-email').value.trim(), password: $('#lg-senha').value });
+  bt.disabled = false; bt.textContent = 'Entrar';
+  if (error) return mostrarLogin(traduz(error.message));
+  $('#tela-login').hidden = true; $('#tela-carga').hidden = false;
+  try { await carregar(data.session); } catch (e) { mostrarLogin(String(e.message || e)); }
+});
+
+async function carregar(session) {
+  $('#tela-login').hidden = true; $('#tela-carga').hidden = false;
+  setCarga('Carregando o motor de cálculo… (na primeira vez pode levar até 30 segundos)');
+  window.__vtAberto = false;
+  try { await motorPronto; } catch (e) { window.__vtFalhou && window.__vtFalhou('Motor de cálculo: ' + (e.message || e)); throw e; }
+  setCarga('Lendo a carteira de empresas…');
+  const emp = await lerTudo(CONFIG.tabelaCarteira, '*', CONFIG.colNome, 1000);
+  const r = await M('iniciar', localStorage.getItem('vt_cfg') || '{}', session.user.email, session.user.id);
+  await M('definir_empresas', JSON.stringify(emp));
+  setCarga('Baixando as apurações da nuvem…');
+  const rows = await lerTudo(CONFIG.tabelaNuvem, 'chave,dados', 'chave', 200);
+  setCarga('Calculando as empresas selecionadas…');
+  await M('aplicar_nuvem', JSON.stringify(rows));
+  $('#comp').value = r.comp;
+  $('#menu-user').textContent = session.user.email;
+  $('#tela-carga').hidden = true; $('#app').hidden = false;
+  window.__vtAberto = true;
+  setNuvem('ok');
+  aplicarLayout();
+  await redesenhar();
+}
+
+// ------------------------------------------------------------------ desenho geral
+async function redesenhar() {
+  await desenharTabela();
+  if (UI.atual) await desenharEmpresa();
+  aplicarLayout();
+}
+
+function aplicarLayout() {
+  const cel = ehCel();
+  marcarModo();
+  $('#rot-modo').textContent = MODOS[UI.modo];
+  $('#rot-tam').textContent = { 14: 'Normal', 15: 'Médio', 16.5: 'Grande', 18: 'Muito grande' }[UI.fs] || UI.fs;
+  if ($('#comp').value) $('#comp-rot').textContent = nomeMes($('#comp').value);
+  $('#busca').placeholder = cel ? 'Buscar empresa ou CNPJ' : 'Buscar empresa ou CNPJ…  ( / )';
+  if (cel) {                              // celular: uma tela de cada vez (lista de empresas OU empresa aberta)
+    const naEmpresa = UI.atual && UI.telaCel === 'emp';
+    $('#mestre').hidden = !!naEmpresa;
+    $('#mestre').style.height = 'auto'; $('#mestre').style.flex = '';
+    $('#mestre').classList.remove('compacto');
+    $('#mestre-compacto').hidden = true; $('#mestre-cheio').hidden = false;
+    $('#detalhe').hidden = !naEmpresa;
+    $('#cab').hidden = false;
+    $('#sel-ordem').value = `${UI.ordem.c}:${UI.ordem.dir}`;
+    return;
+  }
+  $('#mestre').hidden = false;
+  const compacto = UI.atual && UI.aba === 'apuracao' && !UI.tabelaAberta;
+  const m = $('#mestre');
+  m.classList.toggle('compacto', !!compacto);
+  $('#mestre-compacto').hidden = !compacto;
+  $('#mestre-cheio').hidden = !!compacto;
+  $('#divisor').hidden = !!compacto || !UI.atual;
+  $('#bt-recolher').hidden = !(UI.atual && UI.aba === 'apuracao');
+  $('#cab').hidden = !!compacto;
+  if (!compacto) m.style.height = UI.atual ? (UI.alturaMestre || Math.round(window.innerHeight * 0.38)) + 'px' : 'auto';
+  if (!UI.atual) { m.style.flex = '1 1 auto'; } else { m.style.flex = '0 0 auto'; }
+  $('#detalhe').hidden = !UI.atual;
+  $('#comp-rot').textContent = $('#comp').value ? nomeMes($('#comp').value) : '';
+  $('#rot-tam').textContent = { 14: 'Normal', 15: 'Médio', 16.5: 'Grande', 18: 'Muito grande' }[UI.fs] || UI.fs;
+}
+
+// ------------------------------------------------------------------ tabela de empresas
+const COLS_NUM = new Set(['rec', 'calc', 'decl', 'dif', 'fr', 'rbt', 'fx', 'ordem']);
+async function desenharTabela() {
+  const d = await M('tabela', UI.filtro, UI.busca);
+  UI.linhas = d.linhas;
+  $$('#chips button').forEach((b) => {
+    b.classList.toggle('on', b.dataset.f === UI.filtro);
+    b.textContent = { pend: 'Pendentes' + (d.n_pend ? ' ' + d.n_pend : ''), sel: 'Selecionadas ' + d.n_sel, todas: 'Todas ' + d.n_tot, sn: 'Simples', lp: 'Presumido' }[b.dataset.f];
+  });
+  const { c, dir } = UI.ordem;
+  const L = [...d.linhas].sort((a, b) => {
+    const x = a[c], y = b[c];
+    if (x == null && y == null) return a.nome.localeCompare(b.nome);
+    if (x == null) return 1; if (y == null) return -1;
+    const r = COLS_NUM.has(c) ? x - y : String(x).localeCompare(String(y), 'pt-BR');
+    return (r || a.nome.localeCompare(b.nome)) * dir;
+  });
+  UI.ordemIds = L.map((l) => l.id);
+  $$('#tabela th').forEach((th) => th.classList.toggle('ord-asc', th.dataset.c === c && dir === 1) || th.classList.toggle('ord-desc', th.dataset.c === c && dir === -1));
+  $$('#tabela th').forEach((th) => { th.classList.remove('ord-asc', 'ord-desc'); if (th.dataset.c === c) th.classList.add(dir === 1 ? 'ord-asc' : 'ord-desc'); });
+  $('#tabela tbody').innerHTML = L.map((l) => {
+    const difCls = l.dif == null ? '' : Math.abs(l.dif) >= 0.01 ? 'c-bad b' : 'c-ok';
+    const frCls = l.fr != null && l.fr < 0.28 && l.reg === 'SN' ? 'c-warn' : '';
+    const pCls = l.pend_sev === 'erro' ? 'c-bad' : l.pend_sev ? 'c-warn' : l.pend.startsWith('✓') ? 'c-ok' : '';
+    return `<tr data-id="${l.id}" class="${l.id === UI.atual ? 'sel' : ''} ${l.na ? '' : 'fora'}">
+      <td><span class="dot" style="background:${PONTO[l.cod] || PONTO.fora}"></span>${esc(l.sit)}</td>
+      <td class="emp" title="${esc(l.razao)}\n${esc(l.cnpj)}">${esc(l.nome)}</td><td class="col-cnpj">${esc(l.cnpj)}</td>
+      <td>${REG[l.reg] || esc(l.reg)}</td><td class="n">${fmt(l.rec)}</td><td class="n">${fmt(l.calc)}</td><td class="n">${fmt(l.decl)}</td>
+      <td class="n ${difCls}">${fmt(l.dif)}</td><td class="n ${frCls}">${pct(l.fr)}</td><td class="n">${fmt(l.rbt)}</td>
+      <td class="n">${l.fx ? l.fx + 'ª' : '—'}</td><td class="pend ${pCls}" title="${esc(l.pend)}">${esc(l.pend)}</td></tr>`;
+  }).join('') || `<tr><td colspan="12" class="mut" style="padding:24px">${
+    UI.filtro === 'sel' ? 'Nenhuma empresa selecionada: clique em "Todas" e escolha uma.' : UI.filtro === 'pend' ? 'Nenhuma pendência nas empresas selecionadas.' : 'Nenhuma empresa encontrada.'}</td></tr>`;
+  $('#cards').innerHTML = L.map((l) => {
+    const difCls = l.dif == null ? '' : Math.abs(l.dif) >= 0.01 ? 'c-bad' : 'c-ok';
+    const pCls = l.pend_sev === 'erro' ? 'c-bad' : l.pend_sev ? 'c-warn' : l.pend.startsWith('✓') ? 'c-ok' : 'mut';
+    return `<div class="card ${l.id === UI.atual ? 'sel' : ''} ${l.na ? '' : 'fora'}" data-id="${l.id}">
+      <div class="card-top"><span class="dot" style="background:${PONTO[l.cod] || PONTO.fora}"></span><span class="card-nome">${esc(l.nome)}</span><span class="card-sit">${esc(l.sit)}</span></div>
+      <div class="card-nums"><div><div class="r">Receita</div><div class="v">${fmt(l.rec)}</div></div>
+        <div><div class="r">${l.reg === 'LP' ? 'Tributos' : 'DAS calc.'}</div><div class="v">${fmt(l.calc)}</div></div>
+        <div><div class="r">Diferença</div><div class="v ${difCls}">${fmt(l.dif)}</div></div></div>
+      <div class="card-pend ${pCls}">${esc(l.pend)}</div></div>`;
+  }).join('') || `<p class="mut" style="padding:16px">${UI.filtro === 'sel' ? 'Nenhuma empresa selecionada: toque em "Todas" e escolha uma.' : 'Nenhuma empresa encontrada.'}</p>`;
+  const t = d.tot;
+  $('#totais').innerHTML = L.length ? `<b>${L.length}</b> empresa(s) · Receita <b>${brl(t.rec)}</b> · Calculado <b>${brl(t.calc)}</b> · Declarado <b>${brl(t.decl)}</b> · Diferença <b class="${Math.abs(t.dif) >= 0.01 ? 'c-bad' : 'c-ok'}">${brl(t.dif)}</b>${d.n_div ? ` <span class="c-bad">(${d.n_div} com diferença)</span>` : ''} <span class="mut so-pc">· duplo clique abre a validação · F8 próxima pendente</span>` : '';
+  const sel = $('#tabela tr.sel');
+  if (sel) sel.scrollIntoView({ block: 'nearest' });
+  desenharCompacto();
+}
+function desenharCompacto() {
+  if (!UI.atual) return;
+  const ids = UI.ordemIds || [];
+  const i = ids.indexOf(UI.atual);
+  const l = UI.linhas.find((x) => x.id === UI.atual);
+  $('#c-info').innerHTML = l ? `<b>${esc(l.nome)}</b> &nbsp;<span class="dot" style="background:${PONTO[l.cod]}"></span>${esc(l.sit)}${i >= 0 ? ` <span class="mut">· ${i + 1} de ${ids.length} na tabela</span>` : ''}` : '';
+  $('#c-ant').disabled = i <= 0; $('#c-prox').disabled = i < 0 || i >= ids.length - 1;
+}
+
+$('#tabela thead').addEventListener('click', (e) => {
+  const th = e.target.closest('th'); if (!th) return;
+  const c = th.dataset.c;
+  UI.ordem = { c, dir: UI.ordem.c === c ? -UI.ordem.dir : (COLS_NUM.has(c) && c !== 'ordem' ? -1 : 1) };
+  gravarUI(); desenharTabela();
+});
+$('#cards').addEventListener('click', (e) => { const c = e.target.closest('.card[data-id]'); if (c) abrirEmpresa(c.dataset.id); });
+$('#sel-ordem').addEventListener('change', (e) => { const [c, d] = e.target.value.split(':'); UI.ordem = { c, dir: +d }; gravarUI(); desenharTabela(); });
+$('#bt-voltar').addEventListener('click', () => {
+  UI.telaCel = 'lista'; ampliar(false); aplicarLayout();
+  const c = $(`.card[data-id="${UI.atual}"]`); if (c) c.scrollIntoView({ block: 'center' });
+});
+$('#tabela tbody').addEventListener('click', (e) => { const tr = e.target.closest('tr[data-id]'); if (tr) abrirEmpresa(tr.dataset.id); });
+$('#tabela tbody').addEventListener('dblclick', (e) => {
+  const tr = e.target.closest('tr[data-id]'); if (!tr) return;
+  const l = UI.linhas.find((x) => x.id === tr.dataset.id);
+  UI.aba = 'apuracao'; UI.etapa = l && l.cod === 'nao' ? 1 : 5; abrirEmpresa(tr.dataset.id);
+});
+$('#chips').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; UI.filtro = b.dataset.f; gravarUI(); desenharTabela(); });
+let tBusca;
+$('#busca').addEventListener('input', () => { clearTimeout(tBusca); tBusca = setTimeout(() => { UI.busca = $('#busca').value; desenharTabela(); }, 200); });
+
+async function abrirEmpresa(id) {
+  UI.atual = String(id);
+  if (ehCel()) { UI.telaCel = 'emp'; aplicarLayout(); window.scrollTo(0, 0); }
+  $$('#tabela tbody tr').forEach((tr) => tr.classList.toggle('sel', tr.dataset.id === UI.atual));
+  await desenharEmpresa();
+  desenharCompacto();
+  aplicarLayout();
+}
+function andar(d) {
+  const ids = UI.ordemIds || []; const i = ids.indexOf(UI.atual);
+  const j = Math.max(0, Math.min(ids.length - 1, i + d));
+  if (ids[j] && ids[j] !== UI.atual) abrirEmpresa(ids[j]);
+}
+async function proximaPendente() {
+  const a = await M('proxima_pendente');
+  if (!a) return avisar('Todas as empresas selecionadas estão validadas.');
+  UI.aba = 'apuracao'; UI.etapa = a.cod === 'nao' ? 1 : 5; abrirEmpresa(a.id);
+}
+
+// ------------------------------------------------------------------ empresa
+async function desenharEmpresa() {
+  const e = await M('empresa', UI.atual);
+  if (!e || e.ok === false) return;
+  UI.emp = e;
+  $('#vazio').hidden = true; $('#emp').hidden = false;
+  $('#cab-nome').textContent = e.nome;
+  $('#cab-sub').textContent = `${e.cnpj}${e.uf ? ' · ' + e.uf : ''} · ${e.reg_rot} · competência ${e.comp_rot}`;
+  $('#cab-chips').innerHTML = `<span class="chip ${CLS[e.s.cod] || ''}">${esc(e.s.rot)}</span>` + (e.n_pend ? `<span class="chip ${e.pend[0].sev === 'erro' ? 'erro' : 'atencao'}">${e.n_pend} pendência(s)</span>` : '') + (e.salva ? '<span class="chip">apuração salva</span>' : '');
+  $$('#abas button').forEach((b) => b.classList.toggle('on', b.dataset.aba === UI.aba));
+  $('#pag-resumo').hidden = UI.aba !== 'resumo';
+  $('#pag-apuracao').hidden = UI.aba !== 'apuracao';
+  if (UI.aba === 'resumo') desenharResumo(e); else await desenharApuracao(e);
+}
+$('#abas').addEventListener('click', (ev) => { const b = ev.target.closest('button[data-aba]'); if (!b) return; UI.aba = b.dataset.aba; gravarUI(); desenharEmpresa().then(aplicarLayout); });
+const irValidar = () => { UI.aba = 'apuracao'; UI.etapa = 5; gravarUI(); desenharEmpresa().then(aplicarLayout); };
+$('#cab-validar').addEventListener('click', irValidar);
+$('#c-validar').addEventListener('click', irValidar);
+
+function kpi(r, v, s = '', cls = '') { return `<div class="kpi"><div class="r">${r}</div><div class="v ${cls}">${v}</div>${s ? `<div class="s">${s}</div>` : ''}</div>`; }
+function desenharResumo(e) {
+  const r = e.res || {};
+  const difCls = r.dif == null ? '' : Math.abs(r.dif) >= 0.01 ? 'c-bad' : 'c-ok';
+  $('#pag-resumo').innerHTML = `
+    <div class="kpis">
+      ${kpi('Receita do mês', brl(r.rpa))}
+      ${kpi('Tributos calculados', brl(r.calc), r.aliq != null ? 'alíquota efetiva ' + pct(r.aliq, 2) : '')}
+      ${kpi('Declarado', brl(r.decl))}
+      ${kpi('Diferença', brl(r.dif), '', difCls)}
+      ${e.reg === 'SN' ? kpi('Fator R', pct(r.fr), r.rbt12 != null ? 'RBT12 ' + brl(r.rbt12) + (r.faixa ? ' · ' + r.faixa + 'ª faixa' : '') : '') : kpi('Regime', e.reg_rot, r.regra || '')}
+    </div>
+    <div class="bloco"><h3>O que resolver</h3>${e.pend.length ? e.pend.map((p) => `<div class="pend-item" data-x="${esc(p.id)}">
+        <span class="chip ${p.sev === 'erro' ? 'erro' : 'atencao'}">${p.sev === 'erro' ? 'ERRO' : 'ATENÇÃO'}</span>
+        <div class="flex1"><b>${esc(p.titulo)}</b><div class="mut">${esc(p.causa || p.cat || '')}</div></div>
+        ${p.impacto ? `<b class="c-bad">${brl(p.impacto)}</b>` : ''}</div>`).join('')
+      : `<p class="mut">${e.s.cod === 'nao' ? 'Sem dados do mês: importe XML/PGDAS-D ou lance as receitas na Apuração.' : 'Nada pendente nesta competência.'}</p>`}</div>
+    <div class="bloco"><h3>Histórico de apurações</h3><div class="doc">${e.historico}</div></div>
+    <div class="bloco"><h3>Trilha da competência</h3><div class="doc">${e.trilha}</div></div>`;
+  $$('#pag-resumo .pend-item').forEach((el) => el.addEventListener('click', irValidar));
+  ligarLinks($('#pag-resumo'));
+}
+
+// ------------------------------------------------------------------ apuração (5 etapas)
+const ETAPAS = { SN: ['Arquivos', 'Receitas do mês', 'RBT12 e folha', 'Memória de cálculo', 'Validação'],
+                 LP: ['Arquivos', 'Receitas do mês', 'Tributos e retenções', 'Memória de cálculo', 'Validação'] };
+async function desenharApuracao(e) {
+  const nomes = ETAPAS[e.reg] || ETAPAS.SN;
+  $('#ap-regime').value = e.reg;
+  $('#ap-sub').textContent = `${e.cnpj} · competência ${e.comp_rot}`;
+  $('#passos').innerHTML = nomes.map((n, i) => `<button data-et="${i + 1}" class="${UI.etapa === i + 1 ? 'on' : ''}">${i + 1}. ${n}${
+    i === 0 && e.xml.qtd ? ` · ${e.xml.qtd} notas` : i === 4 ? ' · ' + esc(e.s.rot.toLowerCase()) : ''}</button>`).join('');
+  const r = e.res || {};
+  const dif = r.dif;
+  $('#faixa').innerHTML = `
+    <div><div class="r">${e.reg === 'LP' ? 'Tributos do mês' : 'DAS recalculado'}</div><div class="v">${brl(r.calc)}</div><div class="s">${r.calc == null ? 'Lance as receitas do mês' : r.aliq != null ? 'alíquota ' + pct(r.aliq, 2) : ''}</div></div>
+    <div><div class="r">Declarado</div><div class="v">${brl(r.decl)}</div><div class="s">${e.pgdas ? 'PGDAS-D importado' : ''}</div></div>
+    <div><div class="r">Diferença</div><div class="v ${dif == null ? '' : Math.abs(dif) >= 0.01 ? 'c-bad' : 'c-ok'}">${brl(dif)}</div></div>
+    <div><div class="r">Receita do mês</div><div class="v">${brl(r.rpa)}</div></div>
+    <div><div class="r">${e.reg === 'SN' ? 'Fator R · RBT12' : 'Regra'}</div><div class="v">${e.reg === 'SN' ? pct(r.fr) : esc(r.regra || '—')}</div><div class="s">${e.reg === 'SN' && r.rbt12 != null ? brl(r.rbt12) + (r.faixa ? ' · ' + r.faixa + 'ª faixa' : '') : ''}</div></div>`;
+  $('#et-ant').disabled = UI.etapa <= 1;
+  $('#et-prox').hidden = UI.etapa >= 5;
+  $('#et-prox').textContent = UI.etapa < 5 ? nomes[UI.etapa] + ' →' : '';
+  $('#et-status').innerHTML = `<span class="dot" style="background:${PONTO[e.s.cod]}"></span><b>${esc(e.s.rot)}</b> · ${e.s.pendErros || 0} erro(s) · ${e.s.pendAlert || 0} alerta(s) · ${e.s.aprov || 0} aprovada(s)`;
+  $('#ap-salvar').hidden = e.travada;
+  const el = $('#etapa');
+  if (UI.etapa === 1) return etapaArquivos(e, el);
+  if (UI.etapa === 2 || UI.etapa === 3) {
+    if (e.reg !== 'SN') {
+      el.innerHTML = e.reg === 'LP'
+        ? '<p>O lançamento do <b>Lucro Presumido</b> (receitas por atividade, tributos e retenções) ainda é feito no programa desktop. Aqui no site você vê a memória de cálculo e valida a competência com o que já está na nuvem.</p>'
+        : '<p>Regime "Outro": o Validador não apura esta empresa. Troque o regime no seletor acima se ela for do Simples ou do Presumido.</p>';
+      return;
+    }
+    return UI.etapa === 2 ? etapaReceitas(e, el) : etapaRbt12(e, el);
+  }
+  if (UI.etapa === 4) { const m = await M('memoria', e.id); el.innerHTML = `<div class="doc">${m.html}</div>`; return; }
+  return etapaValidacao(e, el);
+}
+$('#passos').addEventListener('click', (ev) => { const b = ev.target.closest('button[data-et]'); if (!b) return; UI.etapa = +b.dataset.et; desenharEmpresa(); });
+$('#et-ant').addEventListener('click', () => { UI.etapa = Math.max(1, UI.etapa - 1); desenharEmpresa(); });
+$('#et-prox').addEventListener('click', () => { UI.etapa = Math.min(5, UI.etapa + 1); desenharEmpresa(); });
+$('#ap-regime').addEventListener('change', async (ev) => { await mudar('definir_regime', UI.atual, ev.target.value); avisar('Regime alterado: vale para todas as competências desta empresa.'); });
+$('#ap-salvar').addEventListener('click', async () => { const r = await mudar('salvar_apuracao', UI.atual); if (r && r.ok) avisar('Apuração salva.'); });
+
+// etapa 1 — arquivos
+function etapaArquivos(e, el) {
+  el.innerHTML = `
+    <div class="drop" id="drop"><b>Arraste aqui os XML (NF-e, NFC-e, NFS-e), o PDF do PGDAS-D ou um .zip</b><br>
+      <span>ou</span> <button id="bt-arq" class="pri" style="margin-top:8px">Escolher arquivos…</button>
+      <input id="in-arq" type="file" multiple accept=".xml,.pdf,.zip,.txt,.csv" hidden>
+      <p class="mut" style="margin:10px 0 0">As notas vão para a empresa certa pelo CNPJ, mesmo que você esteja em outra.</p></div>
+    <div id="log-imp"></div>
+    <div class="bloco" style="margin-top:14px"><h3>Notas desta empresa em ${esc(e.comp_rot)}</h3>
+      ${e.xml.qtd ? `<p><b>${e.xml.qtd}</b> nota(s) · total <b>${brl(e.xml.total)}</b></p>
+        <table class="form"><tr><th>Grupo</th><th class="n" style="text-align:right">Valor</th></tr>${e.xml.grupos.map((g) => `<tr><td>${esc(g.rot)}</td><td class="n">${fmt(g.valor)}</td></tr>`).join('')}</table>`
+        : '<p class="mut">Nenhuma nota importada nesta competência.</p>'}
+      <p class="mut">PGDAS-D da competência: <b>${e.pgdas ? 'importado' : 'não importado'}</b></p></div>`;
+  const inp = $('#in-arq', el), drop = $('#drop', el);
+  $('#bt-arq', el).addEventListener('click', () => inp.click());
+  inp.addEventListener('change', () => importar([...inp.files]));
+  drop.addEventListener('dragover', (ev) => { ev.preventDefault(); drop.classList.add('sobre'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('sobre'));
+  drop.addEventListener('drop', (ev) => { ev.preventDefault(); drop.classList.remove('sobre'); importar([...ev.dataTransfer.files]); });
+}
+async function importar(files) {
+  if (!files.length) return;
+  const log = $('#log-imp');
+  if (log) log.innerHTML = `<p class="mut">Lendo ${files.length} arquivo(s)…</p>`;
+  const lista = await Promise.all(files.map(async (f) => [f.name, new Uint8Array(await f.arrayBuffer())]));
+  try {
+    const r = await M('importar', lista);
+    const sem = Object.entries(r.semEmpresa || {});
+    const html = `<div class="bloco" style="margin-top:12px"><h3>Importação concluída</h3>
+      <p><b>${r.nfe}</b> NF-e/NFC-e · <b>${r.nfse}</b> NFS-e · <b>${r.pgdas.length}</b> PGDAS-D${r.canc ? ` · ${r.canc} cancelada(s)` : ''}${r.compras ? ` · ${r.compras} nota(s) de compra` : ''}</p>
+      ${sem.length ? `<p class="c-warn">CNPJ fora da carteira: ${sem.map(([k, v]) => esc(k) + ' (' + esc(v) + ')').join(', ')}</p>` : ''}
+      ${r.erros.length ? `<p class="c-bad">Com erro: ${r.erros.map(esc).join(' · ')}</p>` : ''}
+      ${r.ignorados.length ? `<p class="mut">Ignorados: ${r.ignorados.map(esc).join(' · ')}</p>` : ''}</div>`;
+    marcarSujo();
+    await redesenhar();
+    const l2 = $('#log-imp'); if (l2) l2.innerHTML = html;
+    avisar('Arquivos importados.');
+  } catch (e) { if (log) log.innerHTML = `<p class="erro">${esc(e.message)}</p>`; }
+}
+
+// etapa 2 — receitas do mês (Simples)
+async function etapaReceitas(e, el) {
+  const f = await M('form_sn', e.id);
+  const trava = e.travada ? 'disabled' : '';
+  const optAnexo = (a) => f.anexos.map((x) => `<option ${x === a ? 'selected' : ''}>${x}</option>`).join('');
+  el.innerHTML = `
+    ${f.xml.length ? `<h3 style="margin-top:0">Receitas das notas (XML)</h3>
+      <table class="form"><tr><th>Grupo</th><th style="width:120px">Anexo</th><th class="n" style="width:160px">Valor</th></tr>
+      ${f.xml.map((x) => `<tr><td>${esc(x.descricao)}</td><td><select data-xml="${esc(x.g)}" ${trava}>${optAnexo(x.anexo)}</select></td><td class="n">${fmt(x.valor)}</td></tr>`).join('')}</table>` : ''}
+    ${f.declaradas.length ? `<p class="mut">Sem lançamento manual: usando o que foi declarado no PGDAS-D (${f.declaradas.length} atividade(s)).</p>` : ''}
+    <h3>${f.xml.length ? 'Outras receitas (lançamento manual)' : 'Receitas do mês'}</h3>
+    <table class="form" id="tb-rec"><tr><th>Descrição</th><th style="width:110px">Anexo</th><th style="width:150px" class="n">Valor</th>
+      <th class="c" title="ICMS por substituição tributária">ST</th><th class="c" title="PIS/Cofins monofásico">Mono</th><th class="c" title="ISS retido na fonte">ISS ret.</th><th class="c" title="Exportação">Exp.</th><th></th></tr>
+      ${f.receitas.map((r, i) => `<tr data-i="${i}"><td><input data-k="descricao" value="${esc(r.descricao)}" placeholder="Ex.: Revenda de peças" ${trava}></td>
+        <td><select data-k="anexo" ${trava}>${optAnexo(r.anexo || 'I')}</select></td>
+        <td><input data-k="valor" class="n" value="${esc(r.valor)}" placeholder="0,00" inputmode="decimal" ${trava}></td>
+        ${['icms_st', 'monofasico', 'iss_retido', 'exportacao'].map((k) => `<td class="c" data-r="${{ icms_st: 'ST', monofasico: 'Mono', iss_retido: 'ISS ret.', exportacao: 'Exp.' }[k]}"><input type="checkbox" data-k="${k}" ${r[k] ? 'checked' : ''} ${trava}></td>`).join('')}
+        <td><button class="ico" data-del="${i}" title="Remover" ${trava}>×</button></td></tr>`).join('')}
+    </table>
+    <button id="bt-add" class="sec" style="margin-top:8px" ${trava}>+ Adicionar receita</button>
+    <div class="linha-campos">
+      <label>DAS informado (se não importar o PGDAS-D)<input id="in-das" class="n" value="${esc(f.dasInf)}" placeholder="${f.das_pgdas != null ? fmt(f.das_pgdas) + ' (PGDAS-D)' : '0,00'}" ${trava}></label>
+    </div>
+    <p class="mut">ST = ICMS por substituição tributária · Mono = PIS/Cofins monofásico · ISS ret. = retido na fonte · Exp. = exportação.
+      ${e.travada ? '<br><b>Competência validada:</b> reabra na etapa 5 para alterar.' : ''}</p>`;
+  const coletar = () => ({
+    receitas: $$('#tb-rec tr[data-i]', el).map((tr) => {
+      const o = {}; $$('[data-k]', tr).forEach((i) => (o[i.dataset.k] = i.type === 'checkbox' ? i.checked : i.value)); return o;
+    }),
+    dasInf: $('#in-das', el).value,
+    anexoXml: Object.fromEntries($$('[data-xml]', el).map((s) => [s.dataset.xml, s.value])),
+  });
+  const salvar = async (patch) => { await mudar('salvar_form_sn', e.id, JSON.stringify(patch || coletar())); };
+  el.addEventListener('change', (ev) => { if (ev.target.matches('input,select')) salvar(); });
+  $('#bt-add', el).addEventListener('click', () => { const p = coletar(); p.receitas.push({ descricao: '', anexo: 'I', valor: '' }); salvar(p); });
+  $$('[data-del]', el).forEach((b) => b.addEventListener('click', () => { const p = coletar(); p.receitas.splice(+b.dataset.del, 1); salvar(p); }));
+}
+
+// etapa 3 — RBT12 e folha (Simples)
+async function etapaRbt12(e, el) {
+  const f = await M('form_sn', e.id);
+  const trava = e.travada ? 'disabled' : '';
+  const tot = f.meses.reduce((s, m) => s + (m.hist_ef || 0), 0);
+  el.innerHTML = `
+    <div class="linha-campos">
+      <label>Início das atividades<input id="in-ini" type="month" value="${esc(f.inicio)}" ${trava}></label>
+      <span class="mut">${f.inicio_ef ? 'em uso: ' + esc(f.inicio_ef) : ''}</span>
+      <label>RBT12 informada (opcional)<input id="in-rbt" class="n" value="${esc(f.rbt12)}" placeholder="calculada pelos meses" ${trava}></label>
+      <label>Folha 12 meses — total (opcional)<input id="in-f12" class="n" value="${esc(f.folha12)}" placeholder="pelos meses abaixo" ${trava}></label>
+    </div>
+    <table class="form" id="tb-meses"><tr><th>Mês</th><th class="n" style="width:200px">Receita bruta</th><th>Origem</th><th class="n" style="width:200px">Folha (salários + pró-labore + encargos)</th><th></th></tr>
+      ${f.meses.map((m) => `<tr data-m="${m.m}"><td><b>${esc(m.rot)}</b></td>
+        <td data-r="Receita bruta"><input data-k="hist" class="n" value="${esc(m.hist)}" placeholder="${m.hist_ef != null ? fmt(m.hist_ef) : '0,00'}" ${trava}></td>
+        <td class="origem">${esc(m.hist)?'manual':esc(m.hist_or || '')}</td>
+        <td data-r="Folha"><input data-k="folha" class="n" value="${esc(m.folha)}" placeholder="${m.folha_ef != null ? fmt(m.folha_ef) : '0,00'}" ${trava}></td><td></td></tr>`).join('')}
+      <tr><td><b>Total 12 meses</b></td><td class="n"><b>${fmt(tot)}</b></td><td></td><td class="n"><b>${fmt(f.folha_12m)}</b></td><td class="origem">${esc(f.origemFolha || '')}</td></tr>
+    </table>
+    <p class="mut">Os valores em cinza vêm do PGDAS-D, de apurações salvas ou dos XML. Digite só o que quiser corrigir; apagar volta para a origem automática.</p>`;
+  const coletar = () => {
+    const hist = {}, folha = {};
+    $$('#tb-meses tr[data-m]', el).forEach((tr) => { hist[tr.dataset.m] = $('[data-k=hist]', tr).value; folha[tr.dataset.m] = $('[data-k=folha]', tr).value; });
+    return { inicio: $('#in-ini', el).value, rbt12: $('#in-rbt', el).value, folha12: $('#in-f12', el).value, hist, folha };
+  };
+  el.addEventListener('change', (ev) => { if (ev.target.matches('input')) mudar('salvar_form_sn', e.id, JSON.stringify(coletar())); });
+}
+
+// etapa 5 — validação
+async function etapaValidacao(e, el) {
+  const v = await M('validacao', e.id);
+  el.innerHTML = `<div style="display:flex;gap:8px;justify-content:flex-end;margin-bottom:8px">
+      ${v.travada ? '<button id="bt-reabrir" class="sec">Reabrir competência</button>' : '<button id="bt-concluir" class="pri">Concluir validação</button>'}
+      <button id="bt-rel" class="sec">Imprimir relatório</button></div>
+    <div class="doc">${v.html}</div>`;
+  ligarLinks(el);
+  const c = $('#bt-concluir', el), ra = $('#bt-reabrir', el);
+  c && c.addEventListener('click', async () => { const r = await mudar('concluir', e.id); if (r && r.ok) avisar('Competência validada.'); });
+  ra && ra.addEventListener('click', async () => { await mudar('reabrir', e.id); avisar('Competência reaberta.'); });
+  $('#bt-rel', el).addEventListener('click', () => imprimir('validacao', e.id));
+}
+
+/** Links dentro do HTML do motor: just:, desjust:, acao:, irpa: (iguais aos do programa). */
+function ligarLinks(el) {
+  el.querySelectorAll('.doc a[href]').forEach((a) => a.addEventListener('click', async (ev) => {
+    const h = a.getAttribute('href');
+    if (/^https?:/.test(h)) return;
+    ev.preventDefault();
+    if (h.startsWith('just:')) return justificar(h.slice(5));
+    if (h.startsWith('desjust:')) return mudar('desfazer_just', UI.atual, h.slice(8));
+    if (h.startsWith('irpa:')) return irComp(h.slice(5));
+    if (h.startsWith('acao:')) {
+      const x = h.slice(5);
+      if (/^\d$/.test(x)) { UI.aba = 'apuracao'; UI.etapa = +x; return desenharEmpresa().then(aplicarLayout); }
+      if (x === 'aba:memoria') { UI.aba = 'apuracao'; UI.etapa = 4; return desenharEmpresa().then(aplicarLayout); }
+      if (x.startsWith('aba:')) { UI.aba = 'apuracao'; UI.etapa = 5; return desenharEmpresa().then(aplicarLayout); }
+      if (x.startsWith('comp:')) return irComp(x.slice(5));
+      if (x === 'importar') { UI.aba = 'apuracao'; UI.etapa = 1; return desenharEmpresa().then(aplicarLayout); }
+      return avisar('Esta ação fica no programa desktop (' + x + ').');
+    }
+    if (h.startsWith('delap:') || h.startsWith('delpg:')) return avisar('Excluir apurações/PGDAS continua no programa desktop.');
+  }));
+}
+async function justificar(xid) {
+  const x = await M('checagem', UI.atual, xid);
+  if (!x) return;
+  const erro = x.sev === 'erro';
+  modal(`<h3>${erro ? 'Justificar divergência' : 'Marcar como revisado'}</h3><p><b>${esc(x.titulo)}</b></p>
+    <textarea id="txt-just" placeholder="${erro ? 'Descreva o motivo (mínimo 10 caracteres)' : 'Observação (opcional)'}"></textarea>
+    <p id="err-just" class="erro" hidden></p>
+    <div class="modal-bts"><button class="sec" id="mj-c">Cancelar</button><button class="pri" id="mj-ok">${erro ? 'Justificar' : 'Marcar revisado'}</button></div>`,
+  (m) => {
+    $('#txt-just', m).focus();
+    $('#mj-c', m).onclick = fecharModal;
+    $('#mj-ok', m).onclick = async () => {
+      const t = $('#txt-just', m).value.trim();
+      if (erro && t.length < 10) { const p = $('#err-just', m); p.hidden = false; p.textContent = 'Descreva a justificativa (mínimo 10 caracteres).'; return; }
+      const r = await M('justificar', UI.atual, xid, t);
+      if (r.ok === false) { const p = $('#err-just', m); p.hidden = false; p.textContent = r.erro; return; }
+      fecharModal(); marcarSujo(); await redesenhar();
+    };
+  });
+}
+async function imprimir(tipo, id) {
+  const w = window.open('', '_blank');
+  const r = await M('relatorio', tipo, id || null);
+  if (!r.ok) { w && w.close(); return avisar(r.erro); }
+  if (!w) return avisar('O navegador bloqueou a nova aba. Libere pop-ups para este site.');
+  w.document.open(); w.document.write(r.html.split('/img/logo_navy.png').join(LOGO).split('/logo_navy.png').join(LOGO)); w.document.close();
+}
+
+// ------------------------------------------------------------------ competência
+async function irComp(c) {
+  $('#comp').value = c;
+  $('#comp-rot').textContent = nomeMes(c);
+  await M('definir_comp', c);
+  await redesenhar();
+}
+$('#comp').addEventListener('change', () => $('#comp').value && irComp($('#comp').value));
+$('#comp-rot').addEventListener('click', () => { try { $('#comp').showPicker(); } catch (_) { $('#comp').focus(); } });
+$('#comp-ant').addEventListener('click', () => irComp(mesAdd($('#comp').value, -1)));
+$('#comp-prox').addEventListener('click', () => irComp(mesAdd($('#comp').value, 1)));
+
+// ------------------------------------------------------------------ menu, nuvem, layout, atalhos
+$('#bt-menu').addEventListener('click', (e) => { e.stopPropagation(); $('#menu').hidden = !$('#menu').hidden; });
+document.addEventListener('click', () => ($('#menu').hidden = true));
+$('#menu').addEventListener('click', async (e) => {
+  const a = e.target.closest('button')?.dataset.acao; if (!a) return;
+  if (a === 'sair') { await enviar(); await sb.auth.signOut(); location.reload(); }
+  if (a === 'atualizar') atualizarNuvem();
+  if (a === 'rel-carteira') imprimir('carteira');
+  if (a === 'modo') trocarModo(UI.modo === 'celular' ? 'computador' : 'celular');
+  if (a === 'tamanho') {
+    const op = [14, 15, 16.5, 18]; UI.fs = op[(op.indexOf(UI.fs) + 1) % op.length];
+    document.documentElement.style.setProperty('--fs', UI.fs + 'px'); gravarUI(); aplicarLayout();
+  }
+});
+async function atualizarNuvem() {
+  await enviar();
+  setNuvem('salvando', 'Baixando…');
+  try {
+    const rows = await lerTudo(CONFIG.tabelaNuvem, 'chave,dados', 'chave', 200);
+    await M('atualizar_nuvem', JSON.stringify(rows));
+    setNuvem('ok'); await redesenhar(); avisar('Dados atualizados da nuvem.');
+  } catch (e) { setNuvem('erro', e.message); avisar(e.message, 6000); }
+}
+$('#bt-nuvem').addEventListener('click', () => (sujo ? enviar() : atualizarNuvem()));
+$('#bt-proxima').addEventListener('click', proximaPendente);
+$('#c-pend').addEventListener('click', proximaPendente);
+$('#c-ant').addEventListener('click', () => andar(-1));
+$('#c-prox').addEventListener('click', () => andar(1));
+$('#bt-mostrar').addEventListener('click', () => { UI.tabelaAberta = true; gravarUI(); aplicarLayout(); });
+$('#bt-recolher').addEventListener('click', () => { UI.tabelaAberta = false; gravarUI(); aplicarLayout(); });
+const ampliar = (on) => document.body.classList.toggle('ampliado', on ?? !document.body.classList.contains('ampliado'));
+$('#ap-ampliar').addEventListener('click', () => ampliar());
+
+// divisória arrastável entre a tabela e a empresa
+$('#divisor').addEventListener('mousedown', (ev) => {
+  ev.preventDefault();
+  const m = $('#mestre'), y0 = ev.clientY, h0 = m.getBoundingClientRect().height;
+  const mover = (e) => { const h = Math.max(140, Math.min(window.innerHeight - 220, h0 + e.clientY - y0)); m.style.height = h + 'px'; UI.alturaMestre = h; };
+  const soltar = () => { document.removeEventListener('mousemove', mover); document.removeEventListener('mouseup', soltar); gravarUI(); };
+  document.addEventListener('mousemove', mover); document.addEventListener('mouseup', soltar);
+});
+
+document.addEventListener('keydown', (e) => {
+  const digitando = /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);
+  if (e.key === 'F8') { e.preventDefault(); proximaPendente(); }
+  else if (e.key === 'F11') { e.preventDefault(); ampliar(); }
+  else if (e.key === 'Escape') { if (!$('#modal-fundo').hidden) fecharModal(); else ampliar(false); }
+  else if (e.altKey && e.key === 'ArrowLeft') { e.preventDefault(); andar(-1); }
+  else if (e.altKey && e.key === 'ArrowRight') { e.preventDefault(); andar(1); }
+  else if (e.ctrlKey && (e.key === 't' || e.key === 'T') && UI.aba === 'apuracao') { e.preventDefault(); UI.tabelaAberta = !UI.tabelaAberta; gravarUI(); aplicarLayout(); }
+  else if (!digitando && e.key === '/') { e.preventDefault(); $('#busca').focus(); }
+  else if (!digitando && !ehCel() && (e.key === 'ArrowDown' || e.key === 'ArrowUp') && !$('#mestre-cheio').hidden) { e.preventDefault(); andar(e.key === 'ArrowDown' ? 1 : -1); }
+});
+window.addEventListener('resize', aplicarLayout);
+sb.auth.onAuthStateChange((ev) => { if (ev === 'SIGNED_OUT') location.reload(); });
+
+abrir().catch((e) => mostrarLogin(String(e.message || e)));
+
+</script>
+</body>
+</html>
